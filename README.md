@@ -94,6 +94,35 @@ entrenamiento, ajustado solo con los datos de entrenamiento.
 > Cada vez que se modifica `src/preprocess.py`, se debe regenerar
 > `abalone_clean.csv` y commitear ambos archivos en el mismo commit.
 
-### 2. Entrenamiento
+### 2. Entrenamiento y evaluación
 
-*(Se completará en el Ejercicio 3.)*
+Requiere haber ejecutado antes el preprocesamiento. Desde la carpeta principal:
+
+```bash
+uv run src/train_model.py
+```
+
+El script:
+
+1. Lee `data/processed/abalone_clean.csv`.
+2. Usa como objetivo `age` y como entradas todas las variables excepto
+   `age` y `rings` (para evitar fuga de información, ya que `age = rings + 1.5`).
+3. Divide los datos en 80% entrenamiento y 20% test con `random_state=42`.
+4. Entrena un `Pipeline` (`StandardScaler` + `RandomForestRegressor`). El
+   escalador se ajusta solo con los datos de entrenamiento.
+5. Evalúa sobre test con MAE, RMSE y R².
+
+Genera:
+
+- `models/model_v1.pkl`: modelo entrenado (pipeline completo, comprimido).
+- `results/metrics_v1.json`: métricas, hiperparámetros y semilla.
+- `results/experiments_log.csv`: se agrega una fila por cada ejecución
+  (identificador, fecha y hora, versión, hiperparámetros y métricas).
+
+Para cargar el modelo entrenado y predecir:
+
+```python
+import joblib
+pipe = joblib.load("models/model_v1.pkl")
+pipe.predict(X_nuevo)
+```
