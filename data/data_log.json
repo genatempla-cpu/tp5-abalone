@@ -9,5 +9,10 @@
     "added derived feature 'age = rings + 1.5'",
     "encoded sex with one-hot encoding (sex_F, sex_I, sex_M)",
     "removed 4 outliers with height <= 0 or height > 0.4"
-  ]
+  ],
+  "parameters": {
+    "age_offset": 1.5,
+    "height_min": 0,
+    "height_max": 0.4
+  }
 }

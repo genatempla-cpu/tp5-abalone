@@ -75,7 +75,9 @@ registro = {
     "rows_before": filas_iniciales,
     "rows_after": len(df),
     "transformations": transformaciones,
+    "parameters": {"age_offset": 1.5, "height_min": altura_min, "height_max": altura_max},
 }
+
 
 with open("data/data_log.json", "w") as archivo:
     json.dump(registro, archivo, indent=2)
