@@ -61,3 +61,16 @@ pipe = Pipeline([
 ])
 
 pipe.fit(X_train, y_train)
+
+# -----------------------------------------------------
+# 5. Evaluar sobre test
+# -----------------------------------------------------
+y_pred = pipe.predict(X_test)
+
+mae = mean_absolute_error(y_test, y_pred)
+rmse = root_mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"MAE:  {mae:.4f}")
+print(f"RMSE: {rmse:.4f}")
+print(f"R2:   {r2:.4f}")
