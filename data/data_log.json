@@ -4,9 +4,10 @@
   "source": "data/raw/abalone_raw.csv",
   "output": "data/processed/abalone_clean.csv",
   "rows_before": 4177,
-  "rows_after": 4177,
+  "rows_after": 4173,
   "transformations": [
     "added derived feature 'age = rings + 1.5'",
-    "encoded sex with one-hot encoding (sex_F, sex_I, sex_M)"
+    "encoded sex with one-hot encoding (sex_F, sex_I, sex_M)",
+    "removed 4 outliers with height <= 0 or height > 0.4"
   ]
 }

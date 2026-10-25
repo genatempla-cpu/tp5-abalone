@@ -39,23 +39,23 @@ df = pd.get_dummies(df, columns=["sex"], dtype=int)
 transformaciones.append("encoded sex with one-hot encoding (sex_F, sex_I, sex_M)")
 
 
-# # -----------------------------------------------------
-# # 4. Eliminar valores atípicos de height
-# #    Criterio: height <= 0 es imposible (un animal sin altura)
-# #              height > 0.4 son valores aislados (el resto no pasa de ~0.25)
-# # -----------------------------------------------------
-# altura_min = 0
-# altura_max = 0.4
+# -----------------------------------------------------
+# 4. Eliminar valores atípicos de height
+#    Criterio: height <= 0 es imposible (un animal sin altura)
+#              height > 0.4 son valores aislados (el resto no pasa de ~0.25)
+# -----------------------------------------------------
+altura_min = 0
+altura_max = 0.4
 
-# # Columna de True/False: True si la fila es atípica
-# es_atipico = (df["height"] <= altura_min) | (df["height"] > altura_max)
+# Columna de True/False: True si la fila es atípica
+es_atipico = (df["height"] <= altura_min) | (df["height"] > altura_max)
 
-# cantidad_eliminada = es_atipico.sum()   # cuenta cuántos True hay
-# df = df[~es_atipico]                    # me quedo con las filas que NO son atípicas
+cantidad_eliminada = es_atipico.sum()   # cuenta cuántos True hay
+df = df[~es_atipico]                    # me quedo con las filas que NO son atípicas
 
-# transformaciones.append(
-#     f"removed {cantidad_eliminada} outliers with height <= {altura_min} or height > {altura_max}"
-# )
+transformaciones.append(
+    f"removed {cantidad_eliminada} outliers with height <= {altura_min} or height > {altura_max}"
+)
 
 
 # -----------------------------------------------------
