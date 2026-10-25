@@ -64,4 +64,36 @@ tp5-abalone/
 ├── requirements.txt         # dependencias fijadas (compatibilidad con pip)
 └── README.md
 ```
+## Uso
 
+### 1. Preprocesamiento
+
+Desde la carpeta principal del proyecto:
+
+```bash
+uv run src/preprocess.py
+```
+
+Lee `data/raw/abalone_raw.csv` y genera:
+
+- `data/processed/abalone_clean.csv`: dataset limpio.
+- `data/data_log.json`: registro de transformaciones (fecha, archivo de
+  origen, transformaciones y parámetros aplicados).
+
+Transformaciones aplicadas:
+
+1. Nueva columna `age = rings + 1.5` (edad estimada en años).
+2. Codificación one-hot de `sex` (`sex_F`, `sex_I`, `sex_M`).
+3. Eliminación de valores atípicos de `height`: registros con `height <= 0`
+   (físicamente imposibles) o `height > 0.4` (valores aislados). Se eliminan
+   4 registros (4177 → 4173).
+
+El escalado de variables **no** se aplica en este paso: se realiza en el
+entrenamiento, ajustado solo con los datos de entrenamiento.
+
+> Cada vez que se modifica `src/preprocess.py`, se debe regenerar
+> `abalone_clean.csv` y commitear ambos archivos en el mismo commit.
+
+### 2. Entrenamiento
+
+*(Se completará en el Ejercicio 3.)*
