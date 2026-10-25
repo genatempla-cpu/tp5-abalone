@@ -103,3 +103,34 @@ resultado = {
 
 with open(f"results/metrics_{VERSION}.json", "w") as archivo:
     json.dump(resultado, archivo, indent=2)
+
+# -----------------------------------------------------
+# 8. Registrar la ejecución en experiments_log.csv
+#    Cada vez que se corre el script se AGREGA una fila
+#    (no se borra lo anterior): es el historial de experimentos.
+# -----------------------------------------------------
+ruta_log = "results/experiments_log.csv"
+ya_existe = os.path.exists(ruta_log)
+
+# El id es correlativo: exp_001, exp_002, ...
+if ya_existe:
+    cantidad_previa = len(pd.read_csv(ruta_log))
+else:
+    cantidad_previa = 0
+
+experimento = {
+    "experiment_id": f"exp_{cantidad_previa + 1:03d}",
+    "datetime": fecha_hora,
+    "model_version": VERSION,
+    "model": "RandomForestRegressor",
+    "hyperparameters": json.dumps(HIPERPARAMETROS),
+    "random_state": SEMILLA,
+    "MAE": metricas["MAE"],
+    "RMSE": metricas["RMSE"],
+    "R2": metricas["R2"],
+}
+
+# mode="a" = append (agregar al final). El encabezado se escribe solo la primera vez.
+pd.DataFrame([experimento]).to_csv(ruta_log, mode="a", header=not ya_existe, index=False)
+
+print("Modelo, métricas y registro guardados.")

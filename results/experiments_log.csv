@@ -1,0 +1,2 @@
+experiment_id,datetime,model_version,model,hyperparameters,random_state,MAE,RMSE,R2
+exp_001,2026-10-25 16:28:16,v1,RandomForestRegressor,"{""n_estimators"": 100, ""max_depth"": 10}",42,1.5439,2.2338,0.5836
