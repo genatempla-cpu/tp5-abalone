@@ -37,3 +37,12 @@ X = df.drop(columns=["age", "rings"])
 y = df["age"]
 
 print("X:", X.shape, "| y:", y.shape)
+
+# -----------------------------------------------------
+# 3. Dividir en entrenamiento y test (con semilla fija)
+# -----------------------------------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=TEST_SIZE, random_state=SEMILLA
+)
+
+print("Train:", X_train.shape, "| Test:", X_test.shape)
