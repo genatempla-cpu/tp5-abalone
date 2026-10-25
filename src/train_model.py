@@ -79,3 +79,27 @@ print(f"R2:   {r2:.4f}")
 # 6. Guardar el modelo entrenado (serializado y comprimido)
 # -----------------------------------------------------
 joblib.dump(pipe, f"models/model_{VERSION}.pkl", compress=3)
+
+# -----------------------------------------------------
+# 7. Guardar métricas, hiperparámetros y semilla (metrics_v1.json)
+# -----------------------------------------------------
+fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+metricas = {"MAE": round(mae, 4), "RMSE": round(rmse, 4), "R2": round(r2, 4)}
+
+resultado = {
+    "version": VERSION,
+    "created_at": fecha_hora,
+    "data": "data/processed/abalone_clean.csv",
+    "model": "RandomForestRegressor",
+    "target": "age",
+    "features": list(X.columns),
+    "random_state": SEMILLA,
+    "test_size": TEST_SIZE,
+    "n_train": len(X_train),
+    "n_test": len(X_test),
+    "hyperparameters": HIPERPARAMETROS,
+    "metrics": metricas,
+}
+
+with open(f"results/metrics_{VERSION}.json", "w") as archivo:
+    json.dump(resultado, archivo, indent=2)
