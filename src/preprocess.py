@@ -29,14 +29,14 @@ df["age"] = df["rings"] + 1.5
 transformaciones.append("added derived feature 'age = rings + 1.5'")
 
 
-# # -----------------------------------------------------
-# # 3. Codificar la variable sex
-# #    sex tiene 3 valores (M, F, I) y los modelos solo entienden números.
-# #    get_dummies crea una columna por valor, con 1 o 0:
-# #      sex = "M"  ->  sex_F=0, sex_I=0, sex_M=1
-# # -----------------------------------------------------
-# df = pd.get_dummies(df, columns=["sex"], dtype=int)
-# transformaciones.append("encoded sex with one-hot encoding (sex_F, sex_I, sex_M)")
+# -----------------------------------------------------
+# 3. Codificar la variable sex
+#    sex tiene 3 valores (M, F, I) y los modelos solo entienden números.
+#    get_dummies crea una columna por valor, con 1 o 0:
+#      sex = "M"  ->  sex_F=0, sex_I=0, sex_M=1
+# -----------------------------------------------------
+df = pd.get_dummies(df, columns=["sex"], dtype=int)
+transformaciones.append("encoded sex with one-hot encoding (sex_F, sex_I, sex_M)")
 
 
 # # -----------------------------------------------------

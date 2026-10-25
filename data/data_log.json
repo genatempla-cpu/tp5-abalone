@@ -6,6 +6,7 @@
   "rows_before": 4177,
   "rows_after": 4177,
   "transformations": [
-    "added derived feature 'age = rings + 1.5'"
+    "added derived feature 'age = rings + 1.5'",
+    "encoded sex with one-hot encoding (sex_F, sex_I, sex_M)"
   ]
 }
