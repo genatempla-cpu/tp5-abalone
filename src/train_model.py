@@ -27,3 +27,13 @@ HIPERPARAMETROS = {"n_estimators": 100, "max_depth": 10}
 # 1. Cargar el dataset limpio (salida del preprocesamiento)
 # -----------------------------------------------------
 df = pd.read_csv("data/processed/abalone_clean.csv")
+
+# -----------------------------------------------------
+# 2. Separar variables de entrada (X) y objetivo (y)
+#    Sacamos "rings" de X: age = rings + 1.5, así que si rings
+#    quedara como entrada, el modelo tendría la respuesta en la mano.
+# -----------------------------------------------------
+X = df.drop(columns=["age", "rings"])
+y = df["age"]
+
+print("X:", X.shape, "| y:", y.shape)
