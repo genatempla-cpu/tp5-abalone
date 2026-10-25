@@ -46,3 +46,18 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 print("Train:", X_train.shape, "| Test:", X_test.shape)
+
+# -----------------------------------------------------
+# 4. Pipeline: escalador + modelo
+#    El Pipeline hace que el escalador se ajuste SOLO con X_train
+#    al llamar a .fit(). Al predecir sobre X_test, usa lo aprendido
+#    en train, sin "ver" los datos de test.
+#    (RandomForest en realidad no necesita escalado, pero así el
+#    Pipeline queda listo si después se cambia el modelo.)
+# -----------------------------------------------------
+pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", RandomForestRegressor(**HIPERPARAMETROS, random_state=SEMILLA)),
+])
+
+pipe.fit(X_train, y_train)
